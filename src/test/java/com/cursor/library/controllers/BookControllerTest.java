@@ -77,6 +77,14 @@ public class BookControllerTest extends BaseControllerTest {
 
     @Test
     @Order(5)
+    void getByIdExceptionNotFoundStatusTest() throws Exception{
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/books/{bookId}", "some id");
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    @Order(6)
     public void createBookTest() throws Exception {
         CreateBookDto createBookDto = new CreateBookDto();
         createBookDto.setName("Cool createBookDto");
