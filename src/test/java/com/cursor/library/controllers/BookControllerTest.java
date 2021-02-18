@@ -15,19 +15,20 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BookControllerTest extends BaseControllerTest {
 
     private BookDao bookDao;
 
     @BeforeAll
-    void setUp(){
+    void setUp() {
         bookDao = new BookDao();
     }
 
     @Test
     @Order(1)
-    void getAllTest() throws Exception{
+    void getAllTest() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/books"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
@@ -55,13 +56,13 @@ public class BookControllerTest extends BaseControllerTest {
     @Test
     @Order(3)
     void deleteByIdExceptionNotFoundStatusTest() throws Exception {
-       mockMvc.perform(MockMvcRequestBuilders.delete("/book/{bookId}", "someId"))
-               .andExpect(MockMvcResultMatchers.status().isNotFound());
+        mockMvc.perform(MockMvcRequestBuilders.delete("/book/{bookId}", "someId"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     @Test
     @Order(4)
-    void getByIdSuccessTest() throws Exception{
+    void getByIdSuccessTest() throws Exception {
         Book bookFromDao = bookDao.getById("random_id_value_5");
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/books/" + bookFromDao.getBookId()))
@@ -77,7 +78,7 @@ public class BookControllerTest extends BaseControllerTest {
 
     @Test
     @Order(5)
-    void getByIdExceptionNotFoundStatusTest() throws Exception{
+    void getByIdExceptionNotFoundStatusTest() throws Exception {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/books/{bookId}", "some id");
         mockMvc.perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
