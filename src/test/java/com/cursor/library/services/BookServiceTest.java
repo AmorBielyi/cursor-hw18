@@ -76,13 +76,13 @@ public class BookServiceTest {
     }
 
     @Test
-    void getValidatedBookNameTest(){
-        String str  = "this is some book name";
+    void getValidatedBookNameTest() {
+        String str = "this is some book name";
         assertEquals(str, bookService.getValidatedBookName(str));
     }
 
     @Test
-    void getCreatedBookTest(){
+    void getCreatedBookTest() {
         String name = "the some book name";
         String desc = "the some book desc";
         int numberOfWords = 154322;
